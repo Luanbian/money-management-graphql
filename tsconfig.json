@@ -4,7 +4,9 @@
 		"module": "commonjs",
 		"target": "esnext",
 		"esModuleInterop":true,
-		"allowJs":true
+		"allowJs":true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true
 	}
 }
  
