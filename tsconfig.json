@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
 		"outDir": "./dist",
-		"module": "commonjs",
-		"target": "esnext",
+		"module": "CommonJS",
+		"strictNullChecks" :true,
 		"esModuleInterop":true,
 		"allowJs":true,
 		"emitDecoratorMetadata": true,
