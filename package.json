@@ -6,7 +6,8 @@
   "scripts": {
     "test": "vitest",
     "test:unit": "npm test -- -c vitest.unit.config.ts",
-    "test:integration": "npm test -- -c vitest.integration.config.ts"
+    "test:integration": "npm test -- -c vitest.integration.config.ts",
+    "authenticate": "ts-node index.gmail.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,13 +21,14 @@
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-n": "^16.3.1",
     "eslint-plugin-promise": "^6.1.1",
-    "googleapis": "^105.0.0",
+    "googleapis": "^129.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.3",
     "vitest": "^1.0.2"
   },
   "dependencies": {
     "apollo-server": "^3.13.0",
+    "google-auth-library": "^9.4.1",
     "graphql": "^15.8.0",
     "graphql-scalars": "^1.22.4",
     "reflect-metadata": "^0.1.14",
