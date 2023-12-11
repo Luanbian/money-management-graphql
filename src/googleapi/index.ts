@@ -5,8 +5,8 @@ import { google } from 'googleapis'
 import { type OAuth2Client } from 'google-auth-library'
 
 const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
-const TOKEN_PATH = path.join(__dirname, 'token.json')
-const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json')
+const TOKEN_PATH = path.join(__dirname, '../../token.json')
+const CREDENTIALS_PATH = path.join(__dirname, '../../credentials.json')
 
 async function loadSavedCredentialsIfExist (): Promise<any> {
   try {
@@ -31,7 +31,7 @@ async function saveCredentials (client: OAuth2Client): Promise<void> {
   await fs.writeFile(TOKEN_PATH, payload)
 }
 
-async function authorize (): Promise<any> {
+async function authorize (): Promise<OAuth2Client> {
   let client = await loadSavedCredentialsIfExist()
   if (client !== null) {
     return client
@@ -46,20 +46,13 @@ async function authorize (): Promise<any> {
   return client
 }
 
-async function listLabels (auth: OAuth2Client): Promise<void> {
+async function listLabels (auth: OAuth2Client): Promise<any> {
   const gmail = google.gmail({ version: 'v1', auth })
-  const res = await gmail.users.labels.list({
+  const res = await gmail.users.messages.list({
     userId: 'me'
   })
-  const labels = res.data.labels
-  if (labels === null || labels === undefined) {
-    console.log('No labels found.')
-    return
-  }
-  console.log('Labels:')
-  labels.forEach((label) => {
-    console.log(`- ${label.name}`)
-  })
+  console.log(res.data)
+  return res
 }
 
 authorize().then(listLabels).catch(console.error)
