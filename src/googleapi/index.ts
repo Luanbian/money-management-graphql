@@ -1,21 +1,18 @@
 import { type OAuth2Client } from 'google-auth-library'
-import { google } from 'googleapis'
+import { type gmail_v1, google } from 'googleapis'
 import * as fs from 'fs/promises'
 import * as path from 'path'
 import { authenticate } from '@google-cloud/local-auth'
+import { type IGoogleApi } from './protocols/google.api.protocol'
 
-export class GoogleApi {
+export class GoogleApi implements IGoogleApi {
   private readonly Token_PATH = path.join(__dirname, '../../token.json')
   private readonly scope = ['https://www.googleapis.com/auth/gmail.readonly']
   private readonly credentials = path.join(__dirname, '../../credentials.json')
 
-  public async list (): Promise<any> {
+  public async getGmail (): Promise<gmail_v1.Gmail> {
     const auth = await this.authorize()
-    const gmail = google.gmail({ version: 'v1', auth })
-    const res = await gmail.users.messages.list({
-      userId: 'me'
-    })
-    return res
+    return google.gmail({ version: 'v1', auth })
   }
 
   private async authorize (): Promise<OAuth2Client> {
