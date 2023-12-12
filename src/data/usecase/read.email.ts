@@ -1,28 +1,24 @@
 import { type EmailData, type IGmailAdapter } from '../../googleapi/protocols/google.api.protocol'
 import { htmlToText } from 'html-to-text'
 import { makeGmailAdapter } from '../../main/factories/adapter.factory'
+import { type Filtered, type Email, type IReadEmail } from '../protocol/read.email.protocol'
 
-export class ReadEmail {
+export class ReadEmail implements IReadEmail {
   constructor (private readonly gmail: IGmailAdapter) {}
 
-  public async perform (): Promise<Array<{
-    body: string
-    subject: string
-  }>> {
+  public async perform (): Promise<Email[]> {
     const messages = await this.gmail.getDataMessage()
     const filteredMessages = await this.filterByKeyword(messages)
     return filteredMessages.map(msg => {
       return {
+        id: msg.message.id,
         body: this.getBody(msg.message),
         subject: msg.subject
       }
     })
   }
 
-  private async filterByKeyword (messages: EmailData[]): Promise<Array<{
-    message: EmailData
-    subject: string
-  }>> {
+  private async filterByKeyword (messages: EmailData[]): Promise<Filtered[]> {
     const keywords: string[] = ['interrompeu']
     const filterMessages = await Promise.all(messages.map(async (msg) => {
       const subject = await this.getHeader(msg, 'Subject')
