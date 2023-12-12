@@ -6,8 +6,7 @@
   "scripts": {
     "test": "vitest",
     "test:unit": "npm test -- -c vitest.unit.config.ts",
-    "test:integration": "npm test -- -c vitest.integration.config.ts",
-    "authenticate": "ts-node src/googleapi/index.ts"
+    "test:integration": "npm test -- -c vitest.integration.config.ts"
   },
   "keywords": [],
   "author": "",
