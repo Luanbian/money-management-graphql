@@ -21,8 +21,8 @@ export interface GmailGetMethod {
 export interface EmailData {
   body: string
   header: Array<{
-    name?: string | null | undefined
-    value?: string | null | undefined
+    name?: string | null
+    value?: string | null
   }>
   id: string
 }
