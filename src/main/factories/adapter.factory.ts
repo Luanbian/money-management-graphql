@@ -1,6 +1,6 @@
-import { GoogleApi } from '../../googleapi'
-import { type IGoogleApi } from '../../googleapi/protocols/google.api.protocol'
+import { GoogleApiAdapter } from '../../googleapi/adapter/google.api.adapter'
+import { type IGmailAdapter } from '../../googleapi/protocols/google.api.protocol'
 
-export const makeGoogleApiConfig = (): IGoogleApi => {
-  return new GoogleApi()
+export const makeGmailAdapter = (): IGmailAdapter => {
+  return new GoogleApiAdapter()
 }
